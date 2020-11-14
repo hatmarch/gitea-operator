@@ -1,0 +1,49 @@
+{
+	"name": "Gitea Operator",
+	"dockerFile": "Dockerfile",
+	"runArgs": [
+		"--privileged",
+		"-v", "${env:HOME}/.kube:/home/jboss/.kube",
+		"-v", "${env:HOME}/.vs-kubernetes:/home/jboss/.vs-kubernetes",
+		"-v", "${env:HOME}/.minikube:/home/jboss/.minikube",
+		"-e", "HOST_USER=${env:USER}"
+
+		// use local .oh-my-zsh configuration if it exists (overwriting one in container).
+		// comment the following line out if you want to use local installation on container instead
+		"-v", "${env:HOME}/.oh-my-zsh:/home/jboss/.oh-my-zsh",
+		"-v", "${env:HOME}/.helm:/home/jboss/.helm",
+		"-v", "${env:HOME}/.ssh:/home/jboss/.ssh",
+		//"AWS_PROFILE=${env:AWS_PROFILE}"
+	],
+	// open these ports for port-forwarding to host during demo
+	"forwardPorts": [],
+	"extensions": [
+		"joaompinto.asciidoctor-vscode",
+		"humao.rest-client",
+		"vscoss.vscode-ansible"
+	],
+	"settings":{
+		"terminal.integrated.shell.linux": "/bin/zsh",
+		"workbench.colorTheme": "Visual Studio Dark",
+		"http.proxyStrictSSL": false,
+		"workbench.tips.enabled": false,
+		"vs-kubernetes": { 
+			"vs-kubernetes.namespace": "", 
+			"vs-kubernetes.kubectl-path": "/usr/local/bin/kubectl", 
+			"vs-kubernetes.helm-path": "", 
+			"vs-kubernetes.draft-path": "", 
+			"vs-kubernetes.minikube-path": "", 
+			"vs-kubernetes.kubectlVersioning": "user-provided", 
+			"vs-kubernetes.outputFormat": "yaml", 
+			"vs-kubernetes.kubeconfig": "", 
+			"vs-kubernetes.knownKubeconfigs": [], 
+			"vs-kubernetes.autoCleanupOnDebugTerminate": false, 
+			"vs-kubernetes.nodejs-autodetect-remote-root": true, 
+			"vs-kubernetes.nodejs-remote-root": "", 
+			"vs-kubernetes.nodejs-debug-port": 9229, 
+			"checkForMinikubeUpgrade": true, 
+			"logsDisplay": "webview", 
+			"imageBuildTool": "Docker" 
+		} 
+	}
+}
