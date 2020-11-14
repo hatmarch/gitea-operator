@@ -9,7 +9,6 @@
 	},
 	"runArgs": [
 		"--privileged",
-
 		"-e", "HOST_USER=${localEnv:USER}",
 		// use local .oh-my-zsh configuration if it exists (overwriting one in container).
 		// comment the following line out if you want to use local installation on container instead

@@ -1,18 +1,19 @@
-#FROM quay.io/mhildenb/operator-builder:latest
 FROM quay.io/operator-framework/ansible-operator:v0.18.1
 
 USER root
 
+# NOTE: This image should never be pushed into a public registry as the username and password will get 
+# exposed in the container (via inspect or through args)
 ARG REDHAT_USER="redhat_user"
 ARG REDHAT_PASS="redhat_pass"
 
 # debugging
-RUN echo "REDHAT_USER is $REDHAT_USER and REDHAT_PASS is $REDHAT_PASS" > /tmp/arg.txt
+# RUN echo "REDHAT_USER is $REDHAT_USER and REDHAT_PASS is $REDHAT_PASS" > /tmp/arg.txt
 
 RUN subscription-manager register  --username="$REDHAT_USER" --password="$REDHAT_PASS" --auto-attach
 
 # RUN yum -y update
-RUN yum install -y wget zsh jq git
+RUN yum install -y wget zsh jq git rsync
 
 RUN subscription-manager unregister
 
